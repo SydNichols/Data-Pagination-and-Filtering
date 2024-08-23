@@ -26,7 +26,7 @@ function searchBar() {
       searchValue = searchValue.toLowerCase();
 
       let filteredStudents = filterStudents(data, searchValue);
-      console.log(filteredStudents);
+      //console.log(filteredStudents);
 
       showPage(filteredStudents, 1);
       addPagination(filteredStudents);
