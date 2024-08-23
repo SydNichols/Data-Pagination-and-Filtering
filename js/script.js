@@ -19,9 +19,36 @@ function searchBar() {
    `;
    header.insertAdjacentHTML("beforeend", searchHTML);
 
+   let searchInput = document.querySelector('#search');
+
+   searchInput.addEventListener("keyup", (e) => {
+      let searchValue = searchInput.value;
+      searchValue = searchValue.toLowerCase();
+
+      let filteredStudents = searchStudents(data, searchValue);
+      console.log(filteredStudents);
+
+      showPage(filteredStudents, 1);
+      addPagination(filteredStudents);
+   })
+
    
 };
 
+function searchStudents(rawList, value){
+   
+      let filteredStudents = [];
+
+      for (const student in rawList) {
+         let fullName = `${rawList[student].name.first} ${rawList[student].name.last}`
+         fullName = fullName.toLowerCase();
+         
+         if (fullName.includes(value)) {
+            filteredStudents.push(rawList[student])
+         }
+      }
+      return filteredStudents;
+}
 
 /*
 Create the `showPage` function
@@ -30,10 +57,10 @@ This function will create and insert/append the elements needed to display a "pa
 function showPage(list, page) {
    const startIndex = (page * 9) - 9;
    const endIndex = page * 9;
- 
+
    let studentList = document.querySelector('ul.student-list');
    studentList.innerHTML = '';
- 
+
    for (let i = 0; i < list.length; i++) {
      if (i >= startIndex && i < endIndex) {
        let studentItem = `
