@@ -25,7 +25,7 @@ function searchBar() {
       let searchValue = searchInput.value;
       searchValue = searchValue.toLowerCase();
 
-      let filteredStudents = searchStudents(data, searchValue);
+      let filteredStudents = filterStudents(data, searchValue);
       console.log(filteredStudents);
 
       showPage(filteredStudents, 1);
@@ -35,7 +35,11 @@ function searchBar() {
    
 };
 
-function searchStudents(rawList, value){
+/*
+filterStudents takes the raw data from the original data list and filters it to provide results based on the searchInput in the searchBar function. 
+*/
+
+function filterStudents(rawList, value){
    
       let filteredStudents = [];
 
