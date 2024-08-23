@@ -61,23 +61,31 @@ function showPage(list, page) {
    let studentList = document.querySelector('ul.student-list');
    studentList.innerHTML = '';
 
-   for (let i = 0; i < list.length; i++) {
-     if (i >= startIndex && i < endIndex) {
-       let studentItem = `
-         <li class="student-item cf">
-           <div class="student-details">
-             <img class="avatar" src="${list[i].picture.medium}" alt="Profile Picture">
-             <h3>${list[i].name.first} ${list[i].name.last}</h3>
-             <span class="email">${list[i].email}</span>
-           </div>
-           <div class="joined-details">
-             <span class="date">Joined ${list[i].registered.date}</span>
-           </div>
-         </li>
-       `;
-       studentList.insertAdjacentHTML("beforeend", studentItem);
-     }
-   }
+   if (list.length >= 1) {
+      for (let i = 0; i < list.length; i++) {
+         if (i >= startIndex && i < endIndex) {
+            let studentItem = `
+               <li class="student-item cf">
+               <div class="student-details">
+                  <img class="avatar" src="${list[i].picture.medium}" alt="Profile Picture">
+                  <h3>${list[i].name.first} ${list[i].name.last}</h3>
+                  <span class="email">${list[i].email}</span>
+               </div>
+               <div class="joined-details">
+                  <span class="date">Joined ${list[i].registered.date}</span>
+               </div>
+               </li>
+            `;
+            studentList.insertAdjacentHTML("beforeend", studentItem);
+         }
+      }
+   } else {
+      const noneMsg = document.createElement('div');
+      noneMsg.textContent = 'Sorry, no results were found';
+      noneMsg.style.font = "italic 35px Helvetica";
+      noneMsg.style.color = "#4a5568";
+      studentList.append(noneMsg);     
+   } 
  };
 
 /*
@@ -102,8 +110,6 @@ function addPagination (list) {
       let firstButton = document.querySelector('ul button');
       firstButton.className = "active";
    }
-
-   
 
    linkList.addEventListener("click", (e) => {
       if (e.target.tagName === 'BUTTON') {
