@@ -88,7 +88,7 @@ function addPagination (list) {
    let pagesNeeded = Math.ceil(list.length / 9);
 
    let linkList = document.querySelector('ul.link-list');
-   linkList.innterHTML = '';
+   linkList.innerHTML = '';
 
    for (let i = 1; i <= pagesNeeded; i++) {
       let button = `
@@ -96,11 +96,14 @@ function addPagination (list) {
          <button type="button">${i}</button>
          </li>
       `;
+
       linkList.insertAdjacentHTML("beforeend", button);
 
-      let firstButton = document.querySelector('button')
-      firstButton.className = "active"
+      let firstButton = document.querySelector('ul button');
+      firstButton.className = "active";
    }
+
+   
 
    linkList.addEventListener("click", (e) => {
       if (e.target.tagName === 'BUTTON') {
